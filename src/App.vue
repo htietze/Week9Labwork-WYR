@@ -18,11 +18,15 @@
     </WouldYouRatherQuestion>
 
     <h1>You Would Rather...</h1>
-    <!-- I don't know how to make a list component. -->
 
+    <!--
+      Answer list! for each answer in the answers array, and only showing answers
+      that have length to fix empty bullets showing up.
+    -->
     <ul id='answerList'>
       <li
       v-for="answer in answers"
+      v-show="answer && answer.length > 0"
       >
         {{ answer }}
       </li>
@@ -74,23 +78,9 @@ export default {
     // when an answer is changed, the id is used to find the right index, then change the answer.
     // or create it on first use
     answerChanged(id, answer) {
+      // sets the array data, fixing it for reactivity, using the answers array,
+      // id for the index, and answer for the value.
       this.$set(this.answers, id, answer)
-      // this.answers[id] = answer
-      // then what I'm not supposed to do, run another method to build the list
-      // this.buildList()
-    },
-    buildList() {
-      // this finds the list element
-      let list = document.getElementById('answerList')
-      // clears it out
-      list.innerHTML = ''
-      // then rewrites it by looping through the answers array and creating new elements
-      // should be dynamic like yours, but I can't figure it out.
-      this.answers.forEach(function(answer) {
-        let listItem = document.createElement('li')
-        listItem.innerHTML = answer
-        list.appendChild(listItem)
-      })
     }
   }
 }
