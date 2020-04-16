@@ -19,12 +19,13 @@
 
     <h1>You Would Rather...</h1>
     <!-- I don't know how to make a list component. -->
+
     <ul id='answerList'>
-      <!-- <li 
-        v-for='answer in answers' 
-        v-bind:key="answer.id">
+      <li
+      v-for="answer in answers"
+      >
         {{ answer }}
-      </li> -->
+      </li>
     </ul>
 
   </div>
@@ -73,9 +74,10 @@ export default {
     // when an answer is changed, the id is used to find the right index, then change the answer.
     // or create it on first use
     answerChanged(id, answer) {
-      this.answers[id] = answer
+      this.$set(this.answers, id, answer)
+      // this.answers[id] = answer
       // then what I'm not supposed to do, run another method to build the list
-      this.buildList()
+      // this.buildList()
     },
     buildList() {
       // this finds the list element
